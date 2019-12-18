@@ -6,12 +6,15 @@ const Nav = () => (
     <ul>
       <li>
         <Link href="/">
-          <Button variant="link">Trumpetr</Button>
+          <p className="logo">Trumpetr</p>
         </Link>
       </li>
       <li>
         <Link href="/login">
-          <Button variant="link">Sign Up / Sign In</Button>
+          <Button style={{ marginRight: 10 }} variant="outline-dark">Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button variant="dark">Register</Button>
         </Link>
       </li>
     </ul>
@@ -20,6 +23,8 @@ const Nav = () => (
       :global(body) {
         margin: 0;
         font-family: "Roboto", sans-serif;
+        border: 2px solid #6f42c1;
+        height: 100vh;
       }
       nav {
         text-align: center;
@@ -37,10 +42,13 @@ const Nav = () => (
         display: flex;
         padding: 6px 8px;
       }
-      a {
-        color: #067df7;
-        text-decoration: none;
+      .logo {
+        color: black;
         font-size: 24px;
+        font-family: "Roboto script=all rev=1", "Adobe Blank";
+        font-weight: bold;
+        font-style: normal;
+        margin: 0;
       }
     `}</style>
   </nav>

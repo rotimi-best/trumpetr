@@ -16,8 +16,8 @@ const Home = () => (
         </p>
       </div>
       <div className="ActionSection">
-        <Link href="/login">
-          <Button variant="outline-primary" size="lg">
+        <Link href="/register">
+          <Button variant="outline-dark" size="lg">
             Start Sharing
           </Button>
         </Link>

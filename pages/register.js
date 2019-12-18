@@ -3,13 +3,17 @@ import Layout from "../components/Layout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const Login = () => {
+const Register = () => {
   const [validated, setValidated] = useState(false);
+  const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
     switch (key) {
+      case "fullname":
+        setFullname(e.target.value);
+        break;
       case "nickname":
         setNickname(e.target.value);
         break;
@@ -27,6 +31,7 @@ const Login = () => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
+
     }
 
     setValidated(true);
@@ -35,10 +40,25 @@ const Login = () => {
   return (
     <Layout>
       <div className="Login">
-        <h1>Welcome back</h1>
+        <h1>Let's create your account</h1>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form.Group controlId="fullname">
+            <Form.Label>Fullname</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="David Oyedepo"
+              value={fullname}
+              onChange={handleChange("fullname")}
+              required
+            />
+            <Form.Control.Feedback className="text-muted">
+              This Fullname is required
+            </Form.Control.Feedback>
+          </Form.Group>
+
           <Form.Group controlId="nickname">
             <Form.Label>Nickname</Form.Label>
+
             <Form.Control
               type="text"
               placeholder="davidoyedepo"
@@ -56,6 +76,7 @@ const Login = () => {
 
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
+
             <Form.Control
               type="password"
               value={password}
@@ -75,11 +96,11 @@ const Login = () => {
           height: 80vh;
           border: 2px solid #6f42c1;
           box-shadow: 10px 14px 0px 0px rgba(110,66,193,1);
-          padding: 10px;
+          padding: 15px;
         }
       `}</style>
     </Layout>
   );
 };
 
-export default Login;
+export default Register;
