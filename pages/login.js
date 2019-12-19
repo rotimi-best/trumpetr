@@ -8,7 +8,9 @@ import { login } from "../actions/user";
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [nickname, setNickname] = useState("");
-  const [nicknameError, setNicknameError] = useState("");
+  const [nicknameError, setNicknameError] = useState(
+    "Your nickname is required and must be unique"
+  );
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
@@ -32,14 +34,18 @@ const Login = () => {
       event.stopPropagation();
     }
 
-    const res = await login({
+    const { success, message } = await login({
       nickname,
       password
     });
-
-    console.log(res);
-
-    setValidated(true);
+    console.log(message, success)
+    if (success) {
+      Router.push("/");
+      setValidated(true);
+    } else {
+      setValidated(false);
+      setNicknameError(message);
+    }
   };
 
   return (
@@ -60,7 +66,7 @@ const Login = () => {
               This nickname is unique to you, also avoid spaces
             </Form.Text>
             <Form.Control.Feedback type="invalid">
-              Your nickname is required and must be unique
+              {nicknameError}
             </Form.Control.Feedback>
           </Form.Group>
 
