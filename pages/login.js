@@ -3,9 +3,12 @@ import Layout from "../components/Layout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import { login } from "../actions/user";
+
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [nickname, setNickname] = useState("");
+  const [nicknameError, setNicknameError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
@@ -21,13 +24,20 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
+
+    const res = await login({
+      nickname,
+      password
+    });
+
+    console.log(res);
 
     setValidated(true);
   };
@@ -74,7 +84,7 @@ const Login = () => {
           margin-top: 3rem;
           height: 80vh;
           border: 2px solid #6f42c1;
-          box-shadow: 10px 14px 0px 0px rgba(110,66,193,1);
+          box-shadow: 10px 14px 0px 0px rgba(110, 66, 193, 1);
           padding: 10px;
         }
       `}</style>

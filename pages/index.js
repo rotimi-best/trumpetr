@@ -1,53 +1,42 @@
 import Layout from "../components/Layout";
+import Welcome from "../components/Welcome";
 import Button from "react-bootstrap/Button";
 import Link from "next/link";
 
-const Home = () => (
-  <Layout>
-    <div className="Home">
-      <div className="IntroSection">
-        <h1>
-          Share the <span className="underline">bible verse</span> you read
-          today and what you learnt with people you care about.
-        </h1>
-        <p>
-          It will help you be accountable, share what you learn and also learn
-          from others
-        </p>
-      </div>
-      <div className="ActionSection">
-        <Link href="/register">
-          <Button variant="outline-dark" size="lg">
-            Start Sharing
-          </Button>
-        </Link>
-      </div>
-    </div>
+const Home = props => {
+  const { auth } = props;
 
-    <style jsx>{`
-      h1 {
-        font-size: 50px;
-      }
-      h1 .underline {
-        border-bottom: 5px solid #6610f2;
-      }
+  if (!auth) {
+    console.log("user is not authenticated");
+  } else {
+    console.log("user is authenticated");
+  }
 
-      .Home {
-        height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-      }
+  return (
+    <Layout>
+      <div className="Home">Hey there</div>
 
-      .Home .ActionSection,
-      .Home .IntroSection {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-    `}</style>
-  </Layout>
-);
+      <style jsx>{``}</style>
+    </Layout>
+  );
+};
+
+Home.getInitialProps = async function() {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    return {
+      auth: false
+    };
+  }
+
+  // const res = await fetch(`${process.env.API_URL}/posts`);
+  // const data = await res.json();
+
+  return {
+    auth: true
+    // posts: data.posts,
+    // user: JSON.parse(user)
+  };
+};
 
 export default Home;

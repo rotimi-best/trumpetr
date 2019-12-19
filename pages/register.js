@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import Router from "next/router";
 import Layout from "../components/Layout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import { register } from "../actions/user";
 
 const Register = () => {
   const [validated, setValidated] = useState(false);
   const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
+  const [nicknameError, setNicknameError] = useState(
+    "Your nickname is required and must be unique"
+  );
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
@@ -15,6 +21,10 @@ const Register = () => {
         setFullname(e.target.value);
         break;
       case "nickname":
+        if (e.target.value === " ") {
+          return setNicknameError("Avoid spaces");
+        }
+        if (!nicknameError.length) setNicknameError("");
         setNickname(e.target.value);
         break;
       case "password":
@@ -25,16 +35,26 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
-
     }
 
-    setValidated(true);
+    const { success, message, user } = await register({
+      fullname,
+      nickname,
+      password
+    });
+    if (success) {
+      Router.push("/");
+      setValidated(true);
+    } else {
+      setValidated(false);
+      setNicknameError(message);
+    }
   };
 
   return (
@@ -70,7 +90,7 @@ const Register = () => {
               This nickname is unique to you, also avoid spaces
             </Form.Text>
             <Form.Control.Feedback type="invalid">
-              Your nickname is required and must be unique
+              {nicknameError}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -95,7 +115,7 @@ const Register = () => {
           margin-top: 3rem;
           height: 80vh;
           border: 2px solid #6f42c1;
-          box-shadow: 10px 14px 0px 0px rgba(110,66,193,1);
+          box-shadow: 10px 14px 0px 0px rgba(110, 66, 193, 1);
           padding: 15px;
         }
       `}</style>
