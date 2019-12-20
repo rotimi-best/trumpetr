@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router from "next/router";
 import Layout from "../components/Layout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,21 +9,22 @@ import { login } from "../actions/user";
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [nickname, setNickname] = useState("");
-  const [nicknameError, setNicknameError] = useState(
-    "Your nickname is required and must be unique"
-  );
+  const [nicknameError, setNicknameError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
+    const val = e.target.value;
+
     switch (key) {
       case "nickname":
-        setNickname(e.target.value);
+        if (/\s/.test(val)) {
+          return;
+        }
+        setNickname(val);
         break;
       case "password":
-        setPassword(e.target.value);
+        setPassword(val);
         break;
-      default:
-        console.log("nothing to do");
     }
   };
 
@@ -38,13 +40,17 @@ const Login = () => {
       nickname,
       password
     });
+
     console.log(message, success)
+
     if (success) {
       Router.push("/");
       setValidated(true);
     } else {
       setValidated(false);
       setNicknameError(message);
+
+      setTimeout(() => setNicknameError(""), 2000);
     }
   };
 
@@ -60,10 +66,11 @@ const Login = () => {
               placeholder="davidoyedepo"
               value={nickname}
               onChange={handleChange("nickname")}
+              isInvalid={nicknameError.length ? true : false}
               required
             />
             <Form.Text className="text-muted">
-              This nickname is unique to you, also avoid spaces
+              This nickname is unique to you
             </Form.Text>
             <Form.Control.Feedback type="invalid">
               {nicknameError}

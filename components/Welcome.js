@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Link from "next/link";
 
 const Welcome = () => (
-  <Layout>
+  <>
     <div className="Welcome">
       <div className="IntroSection">
         <h1>
@@ -47,7 +47,7 @@ const Welcome = () => (
         flex-direction: column;
       }
     `}</style>
-  </Layout>
+  </>
 );
 
 export default Welcome;

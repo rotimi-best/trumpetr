@@ -10,28 +10,25 @@ const Register = () => {
   const [validated, setValidated] = useState(false);
   const [fullname, setFullname] = useState("");
   const [nickname, setNickname] = useState("");
-  const [nicknameError, setNicknameError] = useState(
-    "Your nickname is required and must be unique"
-  );
+  const [nicknameError, setNicknameError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = key => e => {
+    const val = e.target.value;
+
     switch (key) {
       case "fullname":
-        setFullname(e.target.value);
+        setFullname(val);
         break;
       case "nickname":
-        if (e.target.value === " ") {
-          return setNicknameError("Avoid spaces");
+        if (/\s/.test(val)) {
+          return;
         }
-        if (!nicknameError.length) setNicknameError("");
-        setNickname(e.target.value);
+        setNickname(val);
         break;
       case "password":
-        setPassword(e.target.value);
+        setPassword(val);
         break;
-      default:
-        console.log("nothing to do");
     }
   };
 
@@ -54,6 +51,8 @@ const Register = () => {
     } else {
       setValidated(false);
       setNicknameError(message);
+
+      setTimeout(() => setNicknameError(""), 2000);
     }
   };
 
@@ -84,6 +83,7 @@ const Register = () => {
               placeholder="davidoyedepo"
               value={nickname}
               onChange={handleChange("nickname")}
+              isInvalid={nicknameError.length ? true : false}
               required
             />
             <Form.Text className="text-muted">
