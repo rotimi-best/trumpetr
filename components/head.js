@@ -6,7 +6,7 @@ const Head = () => (
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet" />
 
     <link rel="manifest" href="/static/manifest.webmanifest" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/static/manifest.json" />
     <link rel="icon" href="/static/favicon.ico" />
 
     <meta charSet="UTF-8" />
