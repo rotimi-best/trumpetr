@@ -64,7 +64,7 @@ const NewPost = ({ openModal, toggleModal, handleSave }) => {
             variant="outline-primary"
             onClick={resetAndSubmit}
           >
-            Save Changes
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>

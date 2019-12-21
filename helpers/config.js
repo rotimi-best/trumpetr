@@ -1,3 +1,3 @@
 export default {
-  API_URL: "http://localhost:9000"
+  API_URL: "https://trumpetrapi.glitch.me"
 }

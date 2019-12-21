@@ -58,7 +58,7 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="Login">
+      <div className="Register">
         <h1>Let's create your account</h1>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group controlId="fullname">
@@ -111,11 +111,11 @@ const Register = () => {
       </div>
 
       <style jsx>{`
-        .Login {
+        .Register {
           margin-top: 3rem;
           height: 80vh;
-          border: 2px solid #6f42c1;
-          box-shadow: 10px 14px 0px 0px rgba(110, 66, 193, 1);
+          border: 2px solid #007bff;
+          box-shadow: 10px 14px 0px 0px rgb(116, 124, 165);
           padding: 15px;
         }
       `}</style>

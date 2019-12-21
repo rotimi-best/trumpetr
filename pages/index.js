@@ -6,6 +6,8 @@ import Welcome from "../components/Welcome";
 import Posts from "../components/Posts";
 import AppContext from "../context/Context";
 
+import CONFIG from "../helpers/config";
+
 const RightComponent = ({ posts }) => {
   const { user, loading } = useContext(AppContext)
 
@@ -27,50 +29,10 @@ const Home = props => (
 )
 
 Home.getInitialProps = async function() {
-  const res = await fetch(`http://localhost:9000/posts`);
+  const res = await fetch(`${CONFIG.API_URL}/posts`);
   const data = await res.json();
 
-  const posts = data.posts.length
-    ? data.posts
-    : [
-      {
-        fullname: "Best ibitoye",
-        nickname: "best",
-        read: "1 Corin 2: 2",
-        lessons: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      },
-      {
-        fullname: "Bill Gates",
-        nickname: "bill",
-        read: "James",
-        lessons: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        fullname: "Bill Gates",
-        nickname: "bill",
-        read: "James",
-        lessons: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        fullname: "Bill Gates",
-        nickname: "bill",
-        read: "James",
-        lessons: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        fullname: "Bill Gates",
-        nickname: "bill",
-        read: "James",
-        lessons: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        fullname: "Bill Gates",
-        nickname: "bill",
-        read: "James",
-        lessons: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-    ];
-  return { posts };
+  return { posts: data.posts };
 };
 
 export default Home;

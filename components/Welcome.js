@@ -7,8 +7,8 @@ const Welcome = () => (
     <div className="Welcome">
       <div className="IntroSection">
         <h1>
-          Share the <span className="underline">bible verse</span> you read
-          today and what you learnt with people you care about.
+          {/* Share the <span className="underline">bible verse</span> you read */}
+          Share the bible verse you read today and what you learnt with people you care about.
         </h1>
         <p>
           It will help you be accountable, share what you learn and also learn
@@ -45,6 +45,12 @@ const Welcome = () => (
         justify-content: center;
         align-items: center;
         flex-direction: column;
+      }
+
+      @media only screen and (max-width: 600px) {
+        h1 {
+          font-size: 40px;
+        }
       }
     `}</style>
   </>

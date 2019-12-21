@@ -54,7 +54,7 @@ class Layout extends Component {
             height: 100%;
           }
           .root {
-            min-height: 100vh;
+            min-height: 98.3vh;
           }
         `}
         </style>

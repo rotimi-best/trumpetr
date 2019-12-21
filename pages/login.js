@@ -96,8 +96,8 @@ const Login = () => {
         .Login {
           margin-top: 3rem;
           height: 80vh;
-          border: 2px solid #6f42c1;
-          box-shadow: 10px 14px 0px 0px rgba(110, 66, 193, 1);
+          border: 2px solid #007bff;
+          box-shadow: 10px 14px 0px 0px rgb(116, 124, 165);
           padding: 10px;
         }
       `}</style>
