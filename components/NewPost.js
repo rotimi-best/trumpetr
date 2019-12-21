@@ -1,41 +1,69 @@
-import Layout from "./Layout";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
-import Link from "next/link";
 
-const NewPost = (props) => {
-  const { openModal, handleClose, handleSave } = props;
+const NewPost = ({ openModal, toggleModal, handleSave }) => {
+  const [read, setRead] = useState("");
+  const [lesson, setLesson] = useState("");
+  const submitDisabled = read.length && lesson.length ? false : true;
+
+  const handleChange = e => {
+    switch(e.target.name) {
+      case "lesson":
+        setLesson(e.target.value);
+        break;
+      case "read":
+        setRead(e.target.value);
+        break;
+    }
+  }
+
+  const resetAndSubmit = () => {
+    handleSave({ read, lesson })
+    setLesson("")
+    setRead("")
+  }
 
   return (
-    <Layout>
-      <Modal show={openModal} onHide={handleClose}>
+    <>
+      <Modal show={openModal} onHide={toggleModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Share what you learnt</Modal.Title>
+          <Modal.Title>What did you learn?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <InputGroup className="mb-3">
-            <InputGroup.Prepend>
-              <InputGroup.Text id="basic-addon1">Bible verse</InputGroup.Text>
-            </InputGroup.Prepend>
             <FormControl
-              placeholder="Username"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
+              name="read"
+              placeholder="What bible verse did you read today?"
+              aria-label="What bible verse did you read today?"
+              aria-describedby="bible-verse"
+              value={read}
+              onChange={handleChange}
             />
           </InputGroup>
           <InputGroup>
-            <InputGroup.Prepend>
-              <InputGroup.Text>You learnt?</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl as="textarea" aria-label="What did you learn?" />
+            <FormControl
+              name="lesson"
+              as="textarea"
+              aria-describedby="lesson"
+              aria-label="What did you learn from it?"
+              placeholder="What did you learn from it?"
+              value={lesson}
+              onChange={handleChange}
+            />
           </InputGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={toggleModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSave}>
+          <Button
+            disabled={submitDisabled}
+            variant="outline-primary"
+            onClick={resetAndSubmit}
+          >
             Save Changes
           </Button>
         </Modal.Footer>
@@ -43,7 +71,7 @@ const NewPost = (props) => {
 
       <style jsx>{`
       `}</style>
-    </Layout>
+    </>
   )
 };
 

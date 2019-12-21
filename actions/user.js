@@ -1,8 +1,8 @@
-const url = "http://localhost:9000";
+import CONFIG from "../helpers/config";
 
 export const login = async data => {
   try {
-    const response = await fetch(`${url}/login`, {
+    const response = await fetch(`${CONFIG.API_URL}/login`, {
       method: "POST",
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
@@ -19,7 +19,7 @@ export const login = async data => {
 
 export const register = async data => {
   try {
-    const response = await fetch(`${url}/register`, {
+    const response = await fetch(`${CONFIG.API_URL}/register`, {
       method: "POST",
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {

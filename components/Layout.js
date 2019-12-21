@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Head from "next/head";
 import Navbar from "./Navbar";
-import { AppProvider } from "../Context/Context";
+import { AppProvider } from "../context/Context";
 
 class Layout extends Component {
   constructor(props) {
@@ -36,10 +36,7 @@ class Layout extends Component {
       <div className="root">
         <Head>
           <title>Trumptr</title>
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-            rel="stylesheet"
-          />
+          <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet" />
         </Head>
         <Navbar user={user} logout={this.logout} />
         <AppProvider value={{
@@ -52,7 +49,7 @@ class Layout extends Component {
         <style jsx>{`
           :global(body) {
             margin: 0;
-            font-family: 'Robot', sans-serif;
+            font-family: 'Karla', sans-serif;
             border: 8px solid #007bff;
             height: 100%;
           }

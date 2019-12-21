@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import Router from "next/router";
 import { GoPlus } from "react-icons/go";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import {emojify} from 'react-emojione';
+import { emojify } from 'react-emojione';
 
-const Posts = ({ posts }) => {
-  console.log("posts", posts)
+import NewPost from "./NewPost";
+import { addPost } from "../actions/post";
+
+const Posts = ({ posts, user }) => {
+  const [openModal, setOpenModal] = useState(false);
+  console.log("posts", posts, user)
+
+  const toggleModal = () => {
+    setOpenModal(!openModal)
+  }
+
+  const handleSave = async post => {
+    post.userId = user._id;
+    post.lovedBy = [];
+    post.suprisedBy = [];
+    post.thankfulBy = [];
+
+    console.log('post', post)
+    await addPost(post);
+    toggleModal()
+    Router.push("/")
+  }
 
   return (
     <>
@@ -22,7 +43,7 @@ const Posts = ({ posts }) => {
                 <span className="font-weight-bold">Read: </span>{post.read}
               </Card.Text>
               <Card.Text>
-                <span className="font-weight-bold">Lessons: </span>{post.lessons}
+                <span className="font-weight-bold">Lessons: </span>{post.lesson}
               </Card.Text>
             </Card.Body>
             <Card.Footer>
@@ -32,9 +53,14 @@ const Posts = ({ posts }) => {
             </Card.Footer>
           </Card>
         ))}
-          <Button style={{ position: 'fixed', right: '5%', bottom: '5%'}} variant="dark">
-            <GoPlus />
-          </Button>
+        <NewPost
+          handleSave={handleSave}
+          openModal={openModal}
+          toggleModal={toggleModal}
+        />
+        <Button onClick={toggleModal} style={{ position: 'fixed', right: '5%', bottom: '5%'}} variant="dark">
+          <GoPlus />
+        </Button>
       </div>
 
       <style jsx>{`
@@ -44,16 +70,6 @@ const Posts = ({ posts }) => {
       `}</style>
     </>
   )
-};
-
-Posts.getInitialProps = async function () {
-  console.log('url', process.env.API_URL)
-  const res = await fetch(`http://localhost:9000/posts`);
-  const data = await res.json();
-
-  return {
-    posts: data.posts,
-  };
 };
 
 export default Posts;
