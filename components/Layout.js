@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
-import Head from "next/head";
 import Navbar from "./Navbar";
+import Head from "./head";
 import { AppProvider } from "../context/Context";
 
 class Layout extends Component {
@@ -34,18 +34,7 @@ class Layout extends Component {
 
     return (
       <div className="root">
-        <Head>
-          <title>Trumptr</title>
-          <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet" />
-
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="theme-color" content="#007bff" />
-          <link rel="apple-touch-icon" href="/static/icon-512x512.png" />
-          <meta name="apple-mobile-web-app-title" content="Trumptr" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="mobile-web-app-capable" content="yes" />
-        </Head>
+        <Head />
         <Navbar user={user} logout={this.logout} />
         <AppProvider value={{
           user,

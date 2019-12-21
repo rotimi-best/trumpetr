@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
@@ -22,11 +22,26 @@ const RightComponent = ({ posts }) => {
   return <Posts user={user} posts={posts} />;
 }
 
-const Home = props => (
-    <Layout>
-      <RightComponent {...props} />
-    </Layout>
-)
+const Home = props => {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(registration => {
+          console.log('service worker registration successful');
+        })
+        .catch(err => {
+          console.warn('service worker registration failed', err.message);
+        });
+    }
+  }, []);
+
+  return (
+      <Layout>
+        <RightComponent {...props} />
+      </Layout>
+  )
+}
 
 Home.getInitialProps = async function() {
   const res = await fetch(`${CONFIG.API_URL}/posts`);

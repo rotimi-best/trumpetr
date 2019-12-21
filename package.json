@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.6.0",
@@ -19,6 +19,7 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "16.12.0",
     "react-emojione": "^5.0.1",
-    "react-icons": "^3.8.0"
+    "react-icons": "^3.8.0",
+    "sw-precache-webpack-plugin": "^0.11.5"
   }
 }
