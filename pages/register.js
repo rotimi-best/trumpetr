@@ -112,8 +112,8 @@ const Register = () => {
 
       <style jsx>{`
         .Register {
-          margin-top: 3rem;
-          height: 80vh;
+          margin: 3rem 0;
+          min-height: 80vh;
           border: 2px solid #007bff;
           box-shadow: 10px 14px 0px 0px rgb(116, 124, 165);
           padding: 15px;

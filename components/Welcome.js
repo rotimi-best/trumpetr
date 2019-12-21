@@ -33,7 +33,7 @@ const Welcome = () => (
       }
 
       .Welcome {
-        height: 80vh;
+        min-height: 80vh;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
