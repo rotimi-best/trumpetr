@@ -1,7 +1,9 @@
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const withCSS = require("@zeit/next-css");
+const withPWA = require('next-pwa');
+const withPlugins = require('next-compose-plugins');
 
-module.exports = withCSS({
+const nextConfig = {
   webpack: (config) => {
     config.plugins.push(
       new SWPrecacheWebpackPlugin({
@@ -18,4 +20,16 @@ module.exports = withCSS({
 
     return config
   }
-})
+}
+
+module.exports = withPlugins([
+  withCSS,
+  [withPWA, {
+    pwa: {
+      dest: 'public'
+    },
+    experimental: {
+      publicDirectory: true
+    }
+  }]
+], nextConfig)
