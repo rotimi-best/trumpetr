@@ -9,7 +9,7 @@ import AppContext from "../context/Context";
 import CONFIG from "../helpers/config";
 
 const RightComponent = ({ posts }) => {
-  const { user, loading } = useContext(AppContext)
+  const { user, loading } = useContext(AppContext);
 
   if (loading) {
     return <Loading />;
