@@ -16,7 +16,7 @@ const RightComponent = ({ posts }) => {
   }
 
   if (!user) {
-    return <Welcome />
+    return <Welcome />;
   }
 
   return <Posts user={user} posts={posts} />;
