@@ -1,6 +1,6 @@
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const withCSS = require("@zeit/next-css");
-const withPWA = require('next-pwa');
+// const withPWA = require('next-pwa');
 const withPlugins = require('next-compose-plugins');
 
 const nextConfig = {
@@ -24,12 +24,12 @@ const nextConfig = {
 
 module.exports = withPlugins([
   withCSS,
-  [withPWA, {
-    pwa: {
-      dest: 'public'
-    },
-    experimental: {
-      publicDirectory: true
-    }
-  }]
+  // [withPWA, {
+  //   pwa: {
+  //     dest: 'public'
+  //   },
+  //   experimental: {
+  //     publicDirectory: true
+  //   }
+  // }]
 ], nextConfig)

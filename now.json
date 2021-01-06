@@ -3,7 +3,6 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "now-next-pwa",
       "config": {
         "workbox": {
           "globPatterns": [],
